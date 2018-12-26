@@ -9,7 +9,8 @@
 /coverage
 
 # production
-/build
+/server/static
+database.sqlite
 
 # misc
 .DS_Store

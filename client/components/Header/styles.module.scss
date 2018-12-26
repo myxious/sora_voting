@@ -1,0 +1,31 @@
+@import "../../common/styles.scss";
+
+.header {
+  padding-top: 30px;
+}
+
+.headerText {
+  margin-bottom: 0 !important;
+}
+
+.padding {
+  padding: 0 $main-layout-padding !important;
+}
+
+.stickyPlaceholder {
+  height: 50px;
+}
+
+.stickyHeader {
+  display: flex;
+  align-items: center;
+  height: 50px;
+  width: 100%;
+  background: $background-color;
+  transition: box-shadow 0.2s;
+  padding-bottom: 5px !important;
+}
+
+.sticked {
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
+}

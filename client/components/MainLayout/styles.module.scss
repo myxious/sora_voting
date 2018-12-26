@@ -1,0 +1,7 @@
+@import "../../common/styles.scss";
+
+.main {
+  display: flex;
+  flex-direction: column;
+  padding: 0 $main-layout-padding $main-layout-padding $main-layout-padding;
+}

@@ -1,6 +1,13 @@
-const base = require("./base");
+const auth = require("./auth");
+const login = require("./login");
+const userData = require("./userData");
+const logos = require("./logos");
+const vote = require("./vote");
 
 module.exports = {
-  base,
-  hello: db => req => `Hello ${req.params.name}`,
+  auth,
+  login,
+  userData,
+  logos,
+  vote,
 };

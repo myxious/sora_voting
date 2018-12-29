@@ -2,7 +2,7 @@ const Joi = require("joi");
 const config = require("../config");
 const cts = require("../controllers");
 
-// TODO: make a good abstration for front routes
+// TODO: make a good abstraction for front routes
 const frontendIndexHandler = (request, h) => h.file("index.html");
 const frontendRoutes = [
   {

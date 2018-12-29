@@ -2,7 +2,7 @@ const statics = require("./statics");
 const auth = require("./auth");
 const login = require("./login");
 const userData = require("./userData");
-const logos = require("./logos");
+const logoList = require("./logoList");
 const vote = require("./vote");
 
 module.exports = {
@@ -10,6 +10,6 @@ module.exports = {
   auth,
   login,
   userData,
-  logos,
+  logoList,
   vote,
 };

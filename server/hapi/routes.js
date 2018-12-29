@@ -44,8 +44,8 @@ module.exports = db => [
   },
   {
     method: "GET",
-    path: "/api/logos",
-    handler: cts.logos(db),
+    path: "/api/logoList",
+    handler: cts.logoList(db),
     options: { auth: "default" },
   },
   {

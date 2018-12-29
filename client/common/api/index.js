@@ -1,6 +1,7 @@
 import axios from "axios";
 import login from "./login";
 import userData from "./userData";
+import logoList from "./logoList";
 
 const axiosInstance = axios.create({
   timeout: 10000,
@@ -23,4 +24,5 @@ axiosInstance.interceptors.response.use(response => {
 export default {
   login: login(axiosInstance),
   userData: userData(axiosInstance),
+  logoList: logoList(axiosInstance),
 };

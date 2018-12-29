@@ -1,11 +1,11 @@
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 import { withRouter } from "react-router";
 import { object, shape, string, number } from "prop-types";
 import LogoGallery from "../LogoGallery";
 import Header from "../Header";
 import { subscribe } from "../../store";
 
-class MainLayout extends Component {
+class MainLayout extends PureComponent {
   static propTypes = {
     user: shape({
       invite: string.isRequired,

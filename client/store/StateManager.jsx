@@ -15,8 +15,7 @@ class StateManager extends Component {
 
   state = {
     user: undefined,
-    count: 0,
-    somethingElse: "123",
+    logoList: [],
   };
 
   login = async invite => {
@@ -38,13 +37,21 @@ class StateManager extends Component {
     }
   };
 
+  fetchLogoList = async () => {
+    try {
+      const logoList = await api.logoList();
+      this.setState({ logoList });
+    } catch (err) {
+      this.errorHandler(err.message);
+    }
+  };
+
   errorHandler = message => {
     const { alert } = this.props;
     alert.error(message);
   };
 
   render() {
-    const { state } = this;
     const { children } = this.props;
 
     // console.log("current state: ", state);
@@ -53,9 +60,9 @@ class StateManager extends Component {
         value={{
           state: this.state,
           actions: {
-            increment: () => this.setState({ count: state.count + 1 }),
             login: this.login,
             fetchUserData: this.fetchUserData,
+            fetchLogoList: this.fetchLogoList,
           },
         }}
       >

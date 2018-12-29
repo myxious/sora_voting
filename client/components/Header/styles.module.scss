@@ -1,31 +1,58 @@
 @import "../../common/styles.scss";
 
-.header {
-  padding-top: 30px;
-}
-
 .headerText {
-  margin-bottom: 0 !important;
-}
+  width: 100%;
 
-.padding {
-  padding: 0 $main-layout-padding !important;
-}
-
-.stickyPlaceholder {
-  height: 50px;
+  h2 {
+    display: block;
+    margin: 30px auto 0 auto;
+    width: $main-layout-width;
+  }
 }
 
 .stickyHeader {
   display: flex;
+  justify-content: center;
   align-items: center;
-  height: 50px;
+  height: 66px;
+  padding-bottom: 2px;
   width: 100%;
   background: $background-color;
-  transition: box-shadow 0.2s;
-  padding-bottom: 5px !important;
+  transition: all 0.2s;
+
+  .stickyHeaderInner {
+    display: flex;
+    align-items: center;
+    width: $main-layout-width;
+    padding-left: 3px;
+    font-size: 13px;
+
+    %votesLeft {
+      display: flex;
+      justify-content: center;
+      margin-left: 15px;
+      align-items: center;
+      color: white;
+      font-size: 14px;
+      width: 31px;
+      height: 30.6px;
+      border-radius: 19.5px;
+    }
+
+    .positiveVotes {
+      @extend %votesLeft;
+      background-color: #53ca6e;
+    }
+
+    .negativeVotes {
+      @extend %votesLeft;
+      margin-left: 18px;
+      background-color: $red-color;
+    }
+  }
 }
 
 .sticked {
-  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  background-color: lighten($background-color, 1%);
 }

@@ -1,5 +1,4 @@
 import React from "react";
-import { Header as SemanticHeader } from "semantic-ui-react";
 import { string, node } from "prop-types";
 import cn from "classnames";
 import styles from "./styles.module.scss";
@@ -19,15 +18,15 @@ function Card({ className, children }) {
 }
 
 function Header({ className, children }) {
-  return (
-    <SemanticHeader as="h3" className={cn(className, styles.header)}>
-      {children}
-    </SemanticHeader>
-  );
+  return <h3 className={cn(className, styles.header)}>{children}</h3>;
 }
 
 function Image({ src, className }) {
-  return <img className={cn(className, styles.image)} src={src} alt="" />;
+  return (
+    <div className={styles.imageWrapper}>
+      <img className={cn(className, styles.image)} src={src} alt="" />
+    </div>
+  );
 }
 
 function Content({ className, children }) {

@@ -1,7 +1,12 @@
 @import "../../common/styles.scss";
 
 :global {
+  * {
+    box-sizing: border-box;
+  }
+
   body {
+    font-family: "Roboto", sans-serif;
     padding: 0;
     margin: 0;
     background: $background-color;

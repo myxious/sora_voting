@@ -1,5 +1,4 @@
 import React, { PureComponent } from "react";
-import { Button } from "semantic-ui-react";
 import { string } from "prop-types";
 import styles from "./styles.module.scss";
 
@@ -16,9 +15,9 @@ class VotingButton extends PureComponent {
     const { text } = this.props;
 
     return (
-      <Button circular className={styles.button}>
+      <button type="button" className={styles.button}>
         {text}
-      </Button>
+      </button>
     );
   }
 }

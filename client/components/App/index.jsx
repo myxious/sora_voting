@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import { Message } from "semantic-ui-react";
 import MainLayout from "../MainLayout";
 import LoginPage from "../LoginPage";
 import "./styles.module.scss";
@@ -17,10 +16,9 @@ class App extends Component {
   render() {
     const { error } = this.state;
 
+    // TODO: better error visualization
     if (error) {
-      return (
-        <Message negative header="An error occured:" content={error.message} />
-      );
+      return <div>An error occured: {error.message}</div>;
     }
 
     return (

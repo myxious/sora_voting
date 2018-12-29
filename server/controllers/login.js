@@ -1,6 +1,6 @@
 const SQL = require("sql-template-strings");
-const Boom = require("boom");
 const success = require("./utils/success");
+const unsuccess = require("./utils/unsuccess");
 const unhandledError = require("./utils/unhandledError");
 
 const login = db => async request => {
@@ -13,7 +13,7 @@ const login = db => async request => {
       `);
 
     if (!userData) {
-      throw Boom.unauthorized();
+      return unsuccess("Invite code is incorrect");
     }
 
     return success(userData);

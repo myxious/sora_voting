@@ -2,7 +2,6 @@
   display: flex;
   width: 100%;
   justify-content: space-between;
-  padding-top: 10px;
 
   .subPanelLeft {
     display: flex;
@@ -25,7 +24,8 @@
   }
 
   .description {
+    font-size: 13px;
     color: rgba(0, 0, 0, 0.6);
-    padding-top: 10px;
+    padding-top: 16px;
   }
 }

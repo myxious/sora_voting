@@ -7,18 +7,20 @@ import styles from "./styles.module.scss";
 class LogoCard extends PureComponent {
   static propTypes = {
     title: string,
+    image: string,
   };
 
   static defaultProps = {
     title: "",
+    image: "/static/media/default-image.png",
   };
 
   render() {
-    const { title } = this.props;
+    const { title, image } = this.props;
 
     return (
       <Card className={styles.card}>
-        <Card.Image src="https://placeimg.com/800/450/nature" />
+        <Card.Image src={image} />
         <Card.Header>{title}</Card.Header>
         <Card.Content>
           <VotingPanel />

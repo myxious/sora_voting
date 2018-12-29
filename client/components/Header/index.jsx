@@ -1,41 +1,47 @@
 import React, { PureComponent } from "react";
-import { Header as SemanticHeader, Sticky } from "semantic-ui-react";
+import { shape, string, number } from "prop-types";
+import Sticky from "react-stickynode";
 import cn from "classnames";
 import styles from "./styles.module.scss";
 
 class Header extends PureComponent {
-  state = {
-    sticky: false,
+  static propTypes = {
+    user: shape({
+      invite: string.isRequired,
+      positive_votes: number.isRequired,
+      negative_votes: number.isRequired,
+    }).isRequired,
   };
 
-  onStick = () => this.setState({ sticky: true });
-
-  onUnstick = () => this.setState({ sticky: false });
-
   render() {
-    const { sticky } = this.state;
+    const { user } = this.props;
+
     return (
-      <div className={styles.header}>
-        <SemanticHeader
-          as="h2"
-          className={cn(styles.headerText, styles.padding)}
-        >
-          SORA Logo voting
-        </SemanticHeader>
-        <div className={styles.stickyPlaceholder}>
-          <Sticky onStick={this.onStick} onUnstick={this.onUnstick}>
+      <>
+        <div className={styles.headerText}>
+          <h2>SORA Logo voting</h2>
+        </div>
+        <Sticky>
+          {({ status }) => (
             <div
               className={cn({
                 [styles.stickyHeader]: true,
-                [styles.padding]: true,
-                [styles.sticked]: sticky,
+                [styles.sticked]: status === 2,
               })}
             >
-              <span>Remaining votes</span>
+              <div className={styles.stickyHeaderInner}>
+                Remaining votes
+                <div className={styles.negativeVotes}>
+                  {user.negative_votes > 0 ? `-${user.negative_votes}` : 0}
+                </div>
+                <div className={styles.positiveVotes}>
+                  {user.positive_votes > 0 ? `+${user.positive_votes}` : 0}
+                </div>
+              </div>
             </div>
-          </Sticky>
-        </div>
-      </div>
+          )}
+        </Sticky>
+      </>
     );
   }
 }

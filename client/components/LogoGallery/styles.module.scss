@@ -1,3 +1,14 @@
+@import "../../common/styles.scss";
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  width: $main-layout-width;
+  padding-top: 5px;
+  padding-bottom: 80px;
+  margin: auto;
+}
+
 .gallery {
   display: flex;
   width: 100%;

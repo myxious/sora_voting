@@ -1,0 +1,40 @@
+%alert {
+  display: flex;
+  align-items: center;
+  min-width: 200px;
+  box-shadow: 0 2px 5px 0 #ababab87;
+  padding: 10px;
+  padding-right: 5px;
+  border-radius: 8px;
+  background: #fff;
+
+  img {
+    margin-right: 10px;
+  }
+
+  button {
+    border: none;
+    background: none;
+    cursor: pointer;
+    color: #7c7c7c;
+
+    &:focus {
+      outline: none;
+    }
+  }
+}
+
+.info {
+  @extend %alert;
+  background: #fffffb;
+}
+
+.success {
+  @extend %alert;
+  background: #f9fff9;
+}
+
+.error {
+  @extend %alert;
+  background: #fffafa;
+}

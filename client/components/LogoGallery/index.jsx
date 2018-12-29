@@ -35,11 +35,6 @@ class LogoGallery extends PureComponent {
               image={logo.image_name}
             />
           ))}
-          {/* <LogoCard
-            title="Version A"
-            image="https://placeimg.com/800/450/nature"
-          />
-          <LogoCard title="Version B" /> */}
         </div>
       </div>
     );

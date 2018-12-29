@@ -1,3 +1,5 @@
+@import "../../common/styles.scss";
+
 .button {
   width: 39px;
   height: 39px;
@@ -23,5 +25,27 @@
 
   &:active {
     background-color: #e6e6e6;
+  }
+}
+
+.selected {
+  cursor: default;
+
+  &.positive {
+    background: $green-color;
+
+    &:hover,
+    &:focus {
+      background: $green-color;
+    }
+  }
+
+  &.negative {
+    background: $red-color;
+
+    &:hover,
+    &:focus {
+      background: $red-color;
+    }
   }
 }

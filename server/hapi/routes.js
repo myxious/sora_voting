@@ -31,7 +31,7 @@ module.exports = db => [
     options: {
       validate: {
         payload: {
-          invite: Joi.string(),
+          invite: Joi.string().required(),
         },
       },
     },
@@ -56,10 +56,11 @@ module.exports = db => [
       auth: "default",
       validate: {
         payload: {
-          logo_name: Joi.string(),
+          logo_name: Joi.string().required(),
           vote: Joi.number()
             .min(-4)
-            .max(4),
+            .max(4)
+            .required(),
         },
       },
     },

@@ -15,6 +15,7 @@ class LogoGallery extends PureComponent {
       }),
     ).isRequired,
     fetchLogoList: func.isRequired,
+    voteForLogo: func.isRequired,
   };
 
   componentDidMount() {
@@ -23,7 +24,7 @@ class LogoGallery extends PureComponent {
   }
 
   render() {
-    const { logoList } = this.props;
+    const { logoList, voteForLogo } = this.props;
 
     return (
       <div className={styles.wrapper}>
@@ -33,6 +34,8 @@ class LogoGallery extends PureComponent {
               key={logo.name}
               title={logo.name}
               image={logo.image_name}
+              selectedVote={logo.positive_vote || -logo.negative_vote}
+              voteForLogo={voteForLogo}
             />
           ))}
         </div>
@@ -47,6 +50,7 @@ const mapStateToProps = state => ({
 
 const mapActionsToProps = actions => ({
   fetchLogoList: actions.fetchLogoList,
+  voteForLogo: actions.voteForLogo,
 });
 
 export default subscribe(mapStateToProps, mapActionsToProps)(LogoGallery);

@@ -1,9 +1,11 @@
 const Boom = require("boom");
 const SQL = require("sql-template-strings");
 const success = require("./utils/success");
+const unsuccess = require("./utils/unsuccess");
 const unhandledError = require("./utils/unhandledError");
 // DANGER: you are entering into bad code zone
 
+// TODO: refactor all this crap to something not such dumb
 const post = async (request, db) => {
   try {
     const { logo_name, vote } = request.payload;
@@ -38,19 +40,12 @@ const post = async (request, db) => {
   }
 };
 
-const put = async (request, db) => {
+const put = async (request, db, previousVotes) => {
   try {
     const { logo_name, vote } = request.payload;
     const { invite } = request.auth.credentials;
 
-    // TODO: refactor this 💩 to something less verbose, reliable, readable and compact (!)
-    const {
-      positive_vote: previousPositiveVote,
-      negative_vote: previousNegativeVote,
-    } = await db.get(
-      SQL`SELECT positive_vote, negative_vote FROM votes
-            WHERE logo_name = ${logo_name} AND invite = ${invite}`,
-    );
+    const { setPositiveVote, setNegativeVote } = previousVotes;
 
     if (vote > 0) {
       await db.run(
@@ -60,8 +55,8 @@ const put = async (request, db) => {
               WHERE invite = ${invite} AND logo_name = ${logo_name}`,
       );
 
-      if (previousPositiveVote) {
-        const diff = previousPositiveVote - vote;
+      if (setPositiveVote) {
+        const diff = setPositiveVote - vote;
 
         if (diff > 0) {
           await db.run(
@@ -76,11 +71,11 @@ const put = async (request, db) => {
                   WHERE invite = ${invite}`,
           );
         }
-      } else if (previousNegativeVote) {
+      } else if (setNegativeVote) {
         await db.run(
           SQL`UPDATE users
                 SET positive_votes = positive_votes - ${vote}, 
-                    negative_votes = negative_votes + ${previousNegativeVote}
+                    negative_votes = negative_votes + ${setNegativeVote}
                 WHERE invite = ${invite}`,
         );
       } else {
@@ -93,15 +88,15 @@ const put = async (request, db) => {
                   negative_vote = ${Math.abs(vote)}
               WHERE invite = ${invite} AND logo_name = ${logo_name}`,
       );
-      if (previousPositiveVote) {
+      if (setPositiveVote) {
         await db.run(
           SQL`UPDATE users
-                SET positive_votes = positive_votes + ${previousPositiveVote}, 
+                SET positive_votes = positive_votes + ${setPositiveVote}, 
                     negative_votes = negative_votes - ${Math.abs(vote)}
                 WHERE invite = ${invite}`,
         );
-      } else if (previousNegativeVote) {
-        const diff = previousNegativeVote - Math.abs(vote);
+      } else if (setNegativeVote) {
+        const diff = setNegativeVote - Math.abs(vote);
 
         if (diff > 0) {
           await db.run(
@@ -127,15 +122,77 @@ const put = async (request, db) => {
   }
 };
 
-const vote = db => request => {
-  switch (request.method) {
-    case "post":
+const vote = db => async request => {
+  try {
+    const { logo_name, vote: userVote } = request.payload;
+    const { invite } = request.auth.credentials;
+
+    const {
+      positiveVotesLeft,
+      negativeVotesLeft,
+      setPositiveVote,
+      setNegativeVote,
+    } = await db.get(
+      SQL`SELECT positive_votes as positiveVotesLeft,
+                 negative_votes as negativeVotesLeft,
+                 positive_vote as setPositiveVote,
+                 negative_vote as setNegativeVote
+          FROM users
+          LEFT JOIN votes
+          ON votes.invite = users.invite AND votes.logo_name = ${logo_name}
+          WHERE users.invite = ${invite}`,
+    );
+
+    if (
+      !setPositiveVote &&
+      !setNegativeVote &&
+      !isEnoughVotesLeft(positiveVotesLeft, negativeVotesLeft, userVote)
+    ) {
+      return notEnoughVotes();
+    }
+
+    if (setPositiveVote) {
+      if (userVote > 0 && userVote - setPositiveVote > positiveVotesLeft) {
+        return notEnoughVotes();
+      }
+
+      if (userVote < 0 && negativeVotesLeft - Math.abs(userVote) < 0) {
+        return notEnoughVotes();
+      }
+    }
+
+    if (setNegativeVote) {
+      if (
+        userVote < 0 &&
+        Math.abs(userVote) - setNegativeVote > negativeVotesLeft
+      ) {
+        return notEnoughVotes();
+      }
+
+      if (userVote > 0 && positiveVotesLeft - userVote < 0) {
+        return notEnoughVotes();
+      }
+    }
+
+    if (!setPositiveVote && !setNegativeVote) {
       return post(request, db);
-    case "put":
-      return put(request, db);
-    default:
-      throw Boom.badRequest();
+    }
+
+    return put(request, db, { setPositiveVote, setNegativeVote });
+  } catch (err) {
+    return unhandledError(err);
   }
 };
+
+function isEnoughVotesLeft(positiveVotesLeft, negativeVotesLeft, userVote) {
+  return (
+    (userVote > 0 && positiveVotesLeft - userVote >= 0) ||
+    (userVote < 0 && negativeVotesLeft - Math.abs(userVote) >= 0)
+  );
+}
+
+function notEnoughVotes() {
+  return unsuccess("Not enough votes left for voting");
+}
 
 module.exports = vote;

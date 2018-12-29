@@ -46,6 +46,15 @@ class StateManager extends Component {
     }
   };
 
+  voteForLogo = async (logoName, userVote) => {
+    try {
+      await api.vote(logoName, userVote);
+      await Promise.all([this.fetchUserData(), this.fetchLogoList()]);
+    } catch (err) {
+      this.errorHandler(err.message);
+    }
+  };
+
   errorHandler = message => {
     const { alert } = this.props;
     alert.error(message);
@@ -63,6 +72,7 @@ class StateManager extends Component {
             login: this.login,
             fetchUserData: this.fetchUserData,
             fetchLogoList: this.fetchLogoList,
+            voteForLogo: this.voteForLogo,
           },
         }}
       >

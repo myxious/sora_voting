@@ -11,6 +11,15 @@ const post = async (request, db) => {
     const { logo_name, vote } = request.payload;
     const { invite } = request.auth.credentials;
 
+    const logo = await db.get(
+      SQL`SELECT name FROM logos
+          WHERE name = ${logo_name}`,
+    );
+
+    if (!logo) {
+      return unsuccess("Selected logo not found");
+    }
+
     // TODO: fix bad queries below (change SQlite to something better?)
     if (vote > 0) {
       await db.run(

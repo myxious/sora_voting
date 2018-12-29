@@ -16,7 +16,7 @@ class LogoCard extends PureComponent {
 
   static defaultProps = {
     title: "",
-    image: noImagePath,
+    image: null,
     selectedVote: null,
   };
 

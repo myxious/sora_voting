@@ -1,3 +1,17 @@
+@import "../../common/styles.scss";
+
 .card {
-  width: 462px;
+  width: $card-width-big;
+
+  @media screen and (max-width: 500px) {
+    width: $card-width-medium;
+  }
+
+  @media screen and (max-width: 400px) {
+    width: $card-width-small;
+  }
+
+  @media screen and (max-width: 321px) {
+    width: $card-width-extrasmall;
+  }
 }

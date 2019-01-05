@@ -7,6 +7,11 @@
   padding-top: 5px;
   padding-bottom: 80px;
   margin: auto;
+
+  @media screen and (max-width: 960px) {
+    width: 100%;
+    max-width: $card-width-big;
+  }
 }
 
 .gallery {
@@ -14,6 +19,10 @@
   flex-wrap: wrap;
   width: 100%;
   justify-content: space-between;
+
+  @media screen and (max-width: 960px) {
+    justify-content: center;
+  }
 }
 
 .spinner {

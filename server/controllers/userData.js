@@ -12,7 +12,7 @@ const base = db => async request => {
     const { invite } = request.auth.credentials;
 
     const userData = await db.get(SQL`
-      SELECT * FROM Users
+      SELECT positive_votes, negative_votes FROM Users
       WHERE invite = ${invite}
     `);
 

@@ -39,7 +39,6 @@ class MainLayout extends PureComponent {
   fetchUser = async invite => {
     const { fetchUserData } = this.props;
 
-    // this.setState({ isPreloading: true });
     await fetchUserData(invite);
     this.setState({ isPreloading: false });
   };
@@ -48,7 +47,6 @@ class MainLayout extends PureComponent {
     const { isPreloading } = this.state;
     const { user } = this.props;
 
-    // TODO: better loading visualization
     if (isPreloading) {
       return <Spinner />;
     }

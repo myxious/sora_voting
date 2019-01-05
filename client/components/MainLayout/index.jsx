@@ -50,7 +50,7 @@ class MainLayout extends PureComponent {
 
     // TODO: better loading visualization
     if (isPreloading) {
-      return <div>Loading...</div>;
+      return <PreLoading />;
     }
 
     return (
@@ -60,6 +60,15 @@ class MainLayout extends PureComponent {
       </>
     );
   }
+}
+
+// Takes classNames from the main html file
+function PreLoading() {
+  return (
+    <div className="spinner-wrapper">
+      <div className="spinner" />
+    </div>
+  );
 }
 
 const mapStateToProps = state => ({

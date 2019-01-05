@@ -1,6 +1,5 @@
 import React, { PureComponent } from "react";
 import { func, arrayOf, shape, string, number } from "prop-types";
-import cn from "classnames";
 import LogoCard from "../LogoCard";
 import Spinner from "../Spinner";
 import { subscribe } from "../../store";
@@ -18,6 +17,7 @@ class LogoGallery extends PureComponent {
     ).isRequired,
     fetchLogoList: func.isRequired,
     voteForLogo: func.isRequired,
+    cancelVote: func.isRequired,
   };
 
   state = {
@@ -36,6 +36,13 @@ class LogoGallery extends PureComponent {
     this.setState({ isLoading: false });
   };
 
+  cancelVote = async (...args) => {
+    const { cancelVote } = this.props;
+    this.setState({ isLoading: true });
+    await cancelVote(...args);
+    this.setState({ isLoading: false });
+  };
+
   render() {
     const { isLoading } = this.state;
     const { logoList } = this.props;
@@ -51,6 +58,7 @@ class LogoGallery extends PureComponent {
               image={logo.image_name}
               selectedVote={logo.positive_vote || -logo.negative_vote}
               voteForLogo={this.voteForLogo}
+              cancelVote={this.cancelVote}
             />
           ))}
         </div>
@@ -59,13 +67,14 @@ class LogoGallery extends PureComponent {
   }
 }
 
-const mapStateToProps = state => ({
-  logoList: state.logoList,
+const mapStateToProps = ({ logoList }) => ({
+  logoList,
 });
 
-const mapActionsToProps = actions => ({
-  fetchLogoList: actions.fetchLogoList,
-  voteForLogo: actions.voteForLogo,
+const mapActionsToProps = ({ fetchLogoList, voteForLogo, cancelVote }) => ({
+  fetchLogoList,
+  voteForLogo,
+  cancelVote,
 });
 
 export default subscribe(mapStateToProps, mapActionsToProps)(LogoGallery);

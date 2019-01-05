@@ -67,12 +67,12 @@ module.exports = db => [
   },
   {
     method: "DELETE",
-    path: "/api/cancelVote",
+    path: "/api/cancelVote/{logo_name}",
     handler: cts.cancelVote(db),
     options: {
       auth: "default",
       validate: {
-        payload: {
+        params: {
           logo_name: Joi.string().required(),
         },
       },

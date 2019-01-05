@@ -21,7 +21,6 @@ class VotingButton extends PureComponent {
     return (
       <button
         type="button"
-        disabled={isSelected}
         className={cn({
           [styles.button]: true,
           [styles.selected]: isSelected,

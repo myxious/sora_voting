@@ -8,7 +8,7 @@ const unhandledError = require("./utils/unhandledError");
  */
 const cancelVote = db => async request => {
   try {
-    const { logo_name } = request.payload;
+    const { logo_name } = request.params;
     const { invite } = request.auth.credentials;
 
     const votes = await db.get(

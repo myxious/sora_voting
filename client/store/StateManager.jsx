@@ -55,6 +55,15 @@ class StateManager extends Component {
     }
   };
 
+  cancelVote = async logoName => {
+    try {
+      await api.cancelVote(logoName);
+      await Promise.all([this.fetchUserData(), this.fetchLogoList()]);
+    } catch (err) {
+      this.errorHandler(err.message);
+    }
+  };
+
   errorHandler = message => {
     const { alert } = this.props;
     alert.error(message);
@@ -63,7 +72,6 @@ class StateManager extends Component {
   render() {
     const { children } = this.props;
 
-    // console.log("current state: ", state);
     return (
       <Provider
         value={{
@@ -73,6 +81,7 @@ class StateManager extends Component {
             fetchUserData: this.fetchUserData,
             fetchLogoList: this.fetchLogoList,
             voteForLogo: this.voteForLogo,
+            cancelVote: this.cancelVote,
           },
         }}
       >

@@ -1,7 +1,7 @@
 const cancelVote = axios => async logoName => {
   const {
     data: { data },
-  } = await axios.delete("/api/cancelVote", { logo_name: logoName });
+  } = await axios.delete(`api/cancelVote/${logoName}`);
 
   return data;
 };

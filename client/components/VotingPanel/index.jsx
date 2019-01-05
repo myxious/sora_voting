@@ -7,64 +7,40 @@ class VotingPanel extends PureComponent {
   static propTypes = {
     selectedVote: number,
     voteForLogo: func.isRequired,
+    cancelVote: func.isRequired,
   };
 
   static defaultProps = {
     selectedVote: null,
   };
 
-  render() {
-    const { voteForLogo, selectedVote } = this.props;
+  buttonRender = buttonValue => {
+    const { selectedVote, voteForLogo, cancelVote } = this.props;
+    const isSelected = buttonValue === selectedVote;
+    const onClick = isSelected ? cancelVote : () => voteForLogo(buttonValue);
 
+    return (
+      <VotingButton
+        key={buttonValue}
+        text={buttonValue < 0 ? buttonValue.toString() : `+${buttonValue}`}
+        isSelected={isSelected}
+        onClick={onClick}
+      />
+    );
+  };
+
+  render() {
     return (
       <div className={styles.votingPanel}>
         <div className={styles.subPanelLeft}>
           <div className={styles.votingButtons}>
-            <VotingButton
-              text="-4"
-              isSelected={selectedVote === -4}
-              onClick={() => voteForLogo(-4)}
-            />
-            <VotingButton
-              text="-3"
-              isSelected={selectedVote === -3}
-              onClick={() => voteForLogo(-3)}
-            />
-            <VotingButton
-              text="-2"
-              isSelected={selectedVote === -2}
-              onClick={() => voteForLogo(-2)}
-            />
-            <VotingButton
-              text="-1"
-              isSelected={selectedVote === -1}
-              onClick={() => voteForLogo(-1)}
-            />
+            {[-4, -3, -2, -1].map(this.buttonRender)}
           </div>
           <div className={styles.description}>Worst</div>
         </div>
         <div className={styles.subPanelRight}>
           <div className={styles.votingButtons}>
-            <VotingButton
-              text="+1"
-              isSelected={selectedVote === 1}
-              onClick={() => voteForLogo(1)}
-            />
-            <VotingButton
-              text="+2"
-              isSelected={selectedVote === 2}
-              onClick={() => voteForLogo(2)}
-            />
-            <VotingButton
-              text="+3"
-              isSelected={selectedVote === 3}
-              onClick={() => voteForLogo(3)}
-            />
-            <VotingButton
-              text="+4"
-              isSelected={selectedVote === 4}
-              onClick={() => voteForLogo(4)}
-            />
+            {[1, 2, 3, 4].map(this.buttonRender)}
           </div>
           <div className={styles.description}>Best</div>
         </div>

@@ -12,6 +12,7 @@ class LogoCard extends PureComponent {
     image: string,
     selectedVote: number,
     voteForLogo: func.isRequired,
+    cancelVote: func.isRequired,
   };
 
   static defaultProps = {
@@ -20,8 +21,18 @@ class LogoCard extends PureComponent {
     selectedVote: null,
   };
 
+  voteForLogo = vote => {
+    const { title, voteForLogo } = this.props;
+    voteForLogo(title, vote);
+  };
+
+  cancelVote = () => {
+    const { title, cancelVote } = this.props;
+    cancelVote(title);
+  };
+
   render() {
-    const { title, image, selectedVote, voteForLogo } = this.props;
+    const { title, image, selectedVote } = this.props;
 
     return (
       <Card className={styles.card}>
@@ -30,7 +41,8 @@ class LogoCard extends PureComponent {
         <Card.Content>
           <VotingPanel
             selectedVote={selectedVote}
-            voteForLogo={vote => voteForLogo(title, vote)}
+            voteForLogo={this.voteForLogo}
+            cancelVote={this.cancelVote}
           />
         </Card.Content>
       </Card>

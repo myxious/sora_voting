@@ -1,5 +1,9 @@
 const Boom = require("boom");
 
+/**
+ * Throwing a Boom instance error
+ * @param  {Error} err - An error instance
+ */
 const unhandledError = err => {
   if (err instanceof Boom) {
     // If we throw an error intentionally, just push it forward

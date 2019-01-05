@@ -1,5 +1,5 @@
 const SQL = require("sql-template-strings");
-const success = require("./utils/success");
+const { success } = require("./utils/answer");
 const unhandledError = require("./utils/unhandledError");
 
 // Returning list of all logos with current user votes

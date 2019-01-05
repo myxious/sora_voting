@@ -1,6 +1,6 @@
 const SQL = require("sql-template-strings");
 const Boom = require("boom");
-const success = require("./utils/success");
+const { success } = require("./utils/answer");
 const unhandledError = require("./utils/unhandledError");
 
 // Returns current user data

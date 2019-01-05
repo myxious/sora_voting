@@ -1,7 +1,6 @@
 const Boom = require("boom");
 const SQL = require("sql-template-strings");
-const success = require("./utils/success");
-const unsuccess = require("./utils/unsuccess");
+const { success, unsuccess } = require("./utils/answer");
 const unhandledError = require("./utils/unhandledError");
 // DANGER: you are entering into bad code zone
 

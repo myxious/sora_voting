@@ -1,6 +1,5 @@
 const SQL = require("sql-template-strings");
-const success = require("./utils/success");
-const unsuccess = require("./utils/unsuccess");
+const { success, unsuccess } = require("./utils/answer");
 const unhandledError = require("./utils/unhandledError");
 
 const login = db => async request => {

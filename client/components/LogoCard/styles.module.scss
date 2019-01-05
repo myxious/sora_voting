@@ -4,14 +4,14 @@
   width: $card-width-big;
 
   @media screen and (max-width: 500px) {
-    width: $card-width-medium;
+    width: $card-width-medium - 10px;
   }
 
   @media screen and (max-width: 400px) {
-    width: $card-width-small;
+    width: $card-width-small - 10px;
   }
 
   @media screen and (max-width: 321px) {
-    width: $card-width-extrasmall;
+    width: $card-width-extrasmall - 10px;
   }
 }

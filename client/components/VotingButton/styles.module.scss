@@ -13,6 +13,7 @@
   color: #000;
   cursor: pointer;
   transition: all 0.2s;
+  outline: none;
 
   &:hover {
     background-color: #eee;
@@ -25,6 +26,7 @@
 
   &:active {
     background-color: #e6e6e6;
+    outline: none;
   }
 
   @media screen and (max-width: 500px) {

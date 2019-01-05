@@ -12,6 +12,10 @@
     width: 100%;
     max-width: $card-width-big;
   }
+
+  @media screen and (max-width: 500px) {
+    padding-bottom: 5px;
+  }
 }
 
 .gallery {

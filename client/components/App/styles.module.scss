@@ -11,4 +11,8 @@
     margin: 0;
     background: $background-color;
   }
+
+  #root {
+    transition: filter 0.15s;
+  }
 }

@@ -1,0 +1,50 @@
+.wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.2);
+
+  &.isActive {
+    display: flex;
+  }
+
+  .content {
+    width: 70%;
+    max-height: 90vh;
+    position: relative;
+    filter: drop-shadow(2px 2px 3px rgba(0, 0, 0, 0.2));
+
+    img {
+      width: 100%;
+    }
+  }
+}
+
+.closeButton {
+  position: absolute;
+  top: 0;
+  right: 0;
+  transform: translate(50%, -50%);
+  width: 38px;
+  height: 38px;
+  background-color: #ffffff;
+  border-radius: 19px;
+  font-size: 15px;
+  color: #979797;
+  padding-bottom: 4px;
+  border: none;
+
+  &:focus,
+  &:hover {
+    outline: none;
+  }
+}
+
+.rootBlured {
+  filter: blur(3px);
+}

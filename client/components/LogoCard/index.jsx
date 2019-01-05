@@ -4,8 +4,6 @@ import Card from "../Card";
 import VotingPanel from "../VotingPanel";
 import styles from "./styles.module.scss";
 
-const noImagePath = "/static/media/default-image.png";
-
 class LogoCard extends PureComponent {
   static propTypes = {
     title: string,
@@ -13,6 +11,7 @@ class LogoCard extends PureComponent {
     selectedVote: number,
     voteForLogo: func.isRequired,
     cancelVote: func.isRequired,
+    onOpenImage: func.isRequired,
   };
 
   static defaultProps = {
@@ -31,12 +30,17 @@ class LogoCard extends PureComponent {
     cancelVote(title);
   };
 
+  onOpenImage = () => {
+    const { image, onOpenImage } = this.props;
+    onOpenImage(image);
+  };
+
   render() {
     const { title, image, selectedVote } = this.props;
 
     return (
       <Card className={styles.card}>
-        <Card.Image src={image ? `/static/media/${image}` : noImagePath} />
+        <Card.Image src={image} onOpenImage={this.onOpenImage} />
         <Card.Header>{title}</Card.Header>
         <Card.Content>
           <VotingPanel

@@ -1,14 +1,14 @@
 import React, { PureComponent } from "react";
 import { withRouter } from "react-router";
-import { object, shape, string, number } from "prop-types";
+import { object, shape, number } from "prop-types";
 import LogoGallery from "../LogoGallery";
 import Header from "../Header";
+import Spinner from "../Spinner";
 import { subscribe } from "../../store";
 
 class MainLayout extends PureComponent {
   static propTypes = {
     user: shape({
-      invite: string.isRequired,
       positive_votes: number.isRequired,
       negative_votes: number.isRequired,
     }),
@@ -50,7 +50,7 @@ class MainLayout extends PureComponent {
 
     // TODO: better loading visualization
     if (isPreloading) {
-      return <PreLoading />;
+      return <Spinner />;
     }
 
     return (
@@ -60,15 +60,6 @@ class MainLayout extends PureComponent {
       </>
     );
   }
-}
-
-// Takes classNames from the main html file
-function PreLoading() {
-  return (
-    <div className="spinner-wrapper">
-      <div className="spinner" />
-    </div>
-  );
 }
 
 const mapStateToProps = state => ({

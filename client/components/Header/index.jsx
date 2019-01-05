@@ -1,5 +1,5 @@
 import React, { PureComponent } from "react";
-import { shape, string, number } from "prop-types";
+import { shape, number } from "prop-types";
 import Sticky from "react-stickynode";
 import cn from "classnames";
 import styles from "./styles.module.scss";
@@ -7,7 +7,6 @@ import styles from "./styles.module.scss";
 class Header extends PureComponent {
   static propTypes = {
     user: shape({
-      invite: string.isRequired,
       positive_votes: number.isRequired,
       negative_votes: number.isRequired,
     }).isRequired,

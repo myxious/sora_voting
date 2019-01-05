@@ -130,6 +130,10 @@ const put = async (request, db, previousVotes) => {
   }
 };
 
+/**
+ * Defines user voting and re-voting mechanism
+ * @param {Object} db - Database instance
+ */
 const vote = db => async request => {
   try {
     const { logo_name, vote: userVote } = request.payload;

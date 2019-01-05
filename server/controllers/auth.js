@@ -2,7 +2,10 @@ const Boom = require("boom");
 const SQL = require("sql-template-strings");
 const unhandledError = require("./utils/unhandledError");
 
-// Auth scheme for Hapi
+/**
+ * Returns auth validator function for HAPI auth scheme
+ * @param {Object} db - Database instance
+ */
 const validate = db => () => ({
   authenticate: async (request, h) => {
     try {

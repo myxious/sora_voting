@@ -3,7 +3,10 @@ const Boom = require("boom");
 const { success } = require("./utils/answer");
 const unhandledError = require("./utils/unhandledError");
 
-// Returns current user data
+/**
+ * Returns current user data
+ * @param {Object} db - Database instance
+ */
 const base = db => async request => {
   try {
     const { invite } = request.auth.credentials;

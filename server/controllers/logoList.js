@@ -2,7 +2,10 @@ const SQL = require("sql-template-strings");
 const { success } = require("./utils/answer");
 const unhandledError = require("./utils/unhandledError");
 
-// Returning list of all logos with current user votes
+/**
+ * Returns list of all logos with current user votes
+ * @param {Object} db - Database instance
+ */
 const logoList = db => async request => {
   try {
     const { invite } = request.auth.credentials;

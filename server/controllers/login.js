@@ -2,6 +2,10 @@ const SQL = require("sql-template-strings");
 const { success, unsuccess } = require("./utils/answer");
 const unhandledError = require("./utils/unhandledError");
 
+/**
+ * Defines user login by invitational code
+ * @param {Object} db - Database instance
+ */
 const login = db => async request => {
   try {
     const { invite } = request.payload;

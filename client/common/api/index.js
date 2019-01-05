@@ -4,6 +4,7 @@ import login from "./login";
 import userData from "./userData";
 import logoList from "./logoList";
 import vote from "./vote";
+import cancelVote from "./cancelVote";
 
 const axiosInstance = axios.create({
   timeout: 10000,
@@ -37,4 +38,5 @@ export default {
   userData: userData(axiosInstance),
   logoList: logoList(axiosInstance),
   vote: vote(axiosInstance),
+  cancelVote: cancelVote(axiosInstance),
 };

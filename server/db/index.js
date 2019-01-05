@@ -3,7 +3,7 @@ const config = require("../config");
 
 async function dbInit() {
   const db = await sqlite.open(config.dbPath, { Promise });
-  await db.migrate();
+  await db.migrate({ migrationsPath: config.migrationsPath });
 
   return db;
 }

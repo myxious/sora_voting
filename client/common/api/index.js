@@ -21,9 +21,8 @@ axiosInstance.interceptors.response.use(
       if (!response.data.success && response.data.message) {
         throw new Error(response.data.message);
       }
-    } else {
-      throw new Error("Unexpected answer from server");
     }
+    throw new Error("Unexpected answer from server");
   },
   error => {
     if (error.response && error.response.data && error.response.data.message) {
@@ -32,6 +31,11 @@ axiosInstance.interceptors.response.use(
     throw error;
   },
 );
+
+export function setAuthToken(token) {
+  localStorage.setItem("auth", token);
+  axiosInstance.defaults.headers.Authorization = token;
+}
 
 export default {
   login: login(axiosInstance),

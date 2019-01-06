@@ -3,7 +3,7 @@ import React, { Component } from "react";
 import { node, object } from "prop-types";
 import { withAlert } from "react-alert";
 import { Provider } from "./contextCreator";
-import api from "../common/api";
+import api, { setAuthToken } from "../common/api";
 
 // TODO: put actions to separate files with binding to "this"
 
@@ -21,7 +21,7 @@ class StateManager extends Component {
   login = async invite => {
     try {
       const user = await api.login(invite);
-      localStorage.setItem("auth", user.invite);
+      setAuthToken(user.invite);
       this.setState({ user });
     } catch (err) {
       this.errorHandler(err.message);

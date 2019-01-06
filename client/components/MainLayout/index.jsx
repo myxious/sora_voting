@@ -23,7 +23,7 @@ class MainLayout extends PureComponent {
     isPreloading: true,
   };
 
-  componentWillMount() {
+  componentDidMount() {
     const { user, history } = this.props;
 
     const invite = localStorage.getItem("auth");
@@ -53,7 +53,7 @@ class MainLayout extends PureComponent {
 
     return (
       <>
-        <Header user={user} />
+        <Header user={user || {}} />
         <LogoGallery />
       </>
     );

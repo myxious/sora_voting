@@ -41,7 +41,7 @@ class LoginPage extends Component {
     return (
       <div className={styles.loginPage}>
         <div className={styles.loginCard}>
-          <h3 className={styles.loginHeader}>SORA Logo voting TEST</h3>
+          <h3 className={styles.loginHeader}>SORA Logo voting</h3>
           <hr />
           <span className={styles.label}>
             Please enter your invitation code

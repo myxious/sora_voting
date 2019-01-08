@@ -7,7 +7,7 @@ const dev = {
 
 const prod = {
   host: "0.0.0.0",
-  port: 8080
+  port: 9000
 };
 
 const common = {

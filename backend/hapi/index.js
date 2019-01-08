@@ -7,8 +7,8 @@ const dbInit = require("../db");
 
 const server = Hapi.server({
   port: config.port,
-  host: "localhost",
-  routes: { files: { relativeTo: config.statics } },
+  host: config.host,
+  routes: { files: { relativeTo: config.statics } }
 });
 
 // Custom unsuccessfull response with json scheme { success: boolean, data: any, message: string }
@@ -18,7 +18,7 @@ server.ext("onPreResponse", (request, h) => {
   if (response.isBoom && response.output && response.output.payload) {
     response.output.payload = {
       success: false,
-      message: response.output.payload.message,
+      message: response.output.payload.message
     };
   }
 

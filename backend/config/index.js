@@ -1,8 +1,33 @@
 const path = require("path");
 
-module.exports = {
-  port: 3001,
+const dev = {
+  host: "localhost",
+  port: 3001
+};
+
+const prod = {
+  host: "0.0.0.0",
+  port: 8080
+};
+
+const common = {
   dbPath: path.join(__dirname, "../database.sqlite"),
   migrationsPath: path.join(__dirname, "../migrations"),
-  statics: path.join(__dirname, "../static"),
+  statics: path.join(__dirname, "../static")
 };
+
+function getConfig() {
+  if (process.env.NODE_ENV === "development") {
+    return {
+      ...dev,
+      ...common
+    };
+  }
+
+  return {
+    ...prod,
+    ...common
+  };
+}
+
+module.exports = getConfig();

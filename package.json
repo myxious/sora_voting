@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "frontend-dev": "cd frontend && yarn start",
-    "backend-dev": "cd backend && yarn start-dev"
+    "backend-dev": "cd backend && yarn start-dev",
+    "build": "cd frontend && yarn build && cd .. && docker build -t sora-voting ."
   }
 }

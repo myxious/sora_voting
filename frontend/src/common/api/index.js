@@ -19,7 +19,7 @@ axiosInstance.interceptors.response.use(
     if (response.data) {
       if (response.data.success) return response;
       if (!response.data.success && response.data.message) {
-        throw new Error(response.data.message);
+        throw new Error(`Server response: ${response.data.message}`);
       }
     }
     throw new Error("Unexpected answer from server");

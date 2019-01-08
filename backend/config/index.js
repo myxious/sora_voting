@@ -11,7 +11,7 @@ const prod = {
 };
 
 const common = {
-  dbPath: path.join(__dirname, "../database.sqlite"),
+  dbPath: path.join(__dirname, "../data/database.sqlite"),
   migrationsPath: path.join(__dirname, "../migrations"),
   statics: path.join(__dirname, "../static")
 };

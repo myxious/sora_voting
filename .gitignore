@@ -10,7 +10,7 @@ node_modules*
 
 # production
 /backend/static
-database.sqlite*
+/backend/data
 
 # misc
 .DS_Store
